@@ -1,0 +1,39 @@
+#1 Kiến trúc cổ điển 
+Mô tả: Khi website mới hoạt động
+----Issue----
+- Khi lượng truy cập tăng dần => Hiệu suất máy chủ giảm
+- Phải nâng cấp trước khi server die
+
+#2 Kiến trúc tách rời
+Mô tả: Tách app và database riêng biệt ra 2 con server
+- Cải thiện chịu tải của hệ thống
+- Cải thiện thời gian chết của trang web
+=> Issue: Vẫn chưa tối ưu
+
+#3 Kiến trúc cụm (cluster)
+Mô tả: Khi lưu lượng khách hàng tiếp tục tăng
+- 1 server app không thể đáp ứng nhu cầu, trong khi database vẫn chịu được
+----Issue----
+- Phân chia server nào sẽ nhận được request 
+(Ví dụ: 99 request vào server A, 1 request vào server B)
+- User vào server khác nhau thì chia session ntn?
+(Vào server A thì có session, khi vào lại server B thì k có)
+
+#4 Nâng cấp kiến trúc cụm (cluster)
+=> Thêm Load Balancer
+- Có thể chia phần cứng(Thiết bị F5) or phần mềm (Ngix/Apache/Tomcat Java)
+- Áp lực lên database tăng lên
+
+#5 Cải thiện hiệu suất database
+- Nếu chia thành 2 DB  => Mất tính nhất quán dữ liệu 
+- Synch data Master vào Slave 
+- Tỉ lệ Read > Write => Slave cần Ram gấp nhiều lần Master
+=> Design vẫn chưa hoàn chỉnh
+
+#6 Hệ thống tìm kiếm riêng
+- Các Database thường k hiệu quả lắm về đáp ứng nhu cầu việc tìm kiếm
+=> Thêm ElasticSearch 
+
+#7 Nâng cấp hiệu suất đọc dữ liệu
+=> Thêm Redis
+
